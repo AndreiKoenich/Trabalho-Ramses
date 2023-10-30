@@ -1,31 +1,31 @@
 ; Porto Alegre, setembro de 2021
 ; Andrei Pochmann Koenich
-; MatrÌcula: 00308680
-; Trabalho de programaÁ„o - Processador RAMSES - Semestre 2021/1
+; Matr√≠cula: 00308680
+; Trabalho de programa√ß√£o - Processador RAMSES - Semestre 2021/1
 
-; O programa a seguir simula uma situaÁ„o na qual uma esfera È inserida em uma caixa fechada nas partes superior e inferior, com aberturas nos outros quatro lados. O objetivo do programa È determinar a direÁ„o 
-; e a localizaÁ„o da saÌda de uma esfera, sendo conhecidas a direÁ„o e a localizaÁ„o da entrada da mesma. Observando a caixa de cima, pode-se dividi-la em cÈlulas de maneira a formar uma matriz quadrada de 
-; ordem 6 (6 linhas e 6 colunas). A localizaÁ„o da entrada da esfera, assim como a da saÌda, ser· feita atravÈs da indicaÁ„o das abcissas (X) e das ordenadas (Y) da cÈlula correspondente. Dentro da caixa est„o 
-; dispostos elementos redirecionadores da esfera. Esses dispositivos s„o capazes de alterar a direÁ„o do movimento da esfera. Cada cÈlula da matriz pode ter, no m·ximo, um desses dispositivos. … garantido que 
-; os redirecionadores jamais formar„o ciclos. Considera-se que os valores decimais que correspondem aos movimentos para direita, esquerda, baixo e cima s„o, respectivamente, 1, 2, 4 e 8. Os endereÁos decimais
-; que contÍm as coordenadas iniciais X e Y da esfera e a direÁ„o inicial s„o, respectivamente, 253, 254 e 255. A matriz que representa a caixa est· contida entre os endereÁos 217 e 252, sendo que os primeiros 6 
-; endereÁos representam a primeira linha da matriz, os segundos 6 endereÁos representam a segunda linha, e assim por diante. Cada posiÁ„o pode n„o possuir nenhum redirecionador (valor zero) ou um dos quatro 
-; redirecionadores com os valores j· mencionados. O resultado (localizaÁ„o e direÁ„o da esfera) ser· informado, ao final da execuÁ„o do programa, nos mesmos endereÁos usados para informar sua localizaÁ„o e direÁ„o de entrada.
+; O programa a seguir simula uma situa√ß√£o na qual uma esfera √© inserida em uma caixa fechada nas partes superior e inferior, com aberturas nos outros quatro lados. O objetivo do programa √© determinar a dire√ß√£o 
+; e a localiza√ß√£o da sa√≠da de uma esfera, sendo conhecidas a dire√ß√£o e a localiza√ß√£o da entrada da mesma. Observando a caixa de cima, pode-se dividi-la em c√©lulas de maneira a formar uma matriz quadrada de 
+; ordem 6 (6 linhas e 6 colunas). A localiza√ß√£o da entrada da esfera, assim como a da sa√≠da, ser√° feita atrav√©s da indica√ß√£o das abcissas (X) e das ordenadas (Y) da c√©lula correspondente. Dentro da caixa est√£o 
+; dispostos elementos redirecionadores da esfera. Esses dispositivos s√£o capazes de alterar a dire√ß√£o do movimento da esfera. Cada c√©lula da matriz pode ter, no m√°ximo, um desses dispositivos. √â garantido que 
+; os redirecionadores jamais formar√£o ciclos. Considera-se que os valores decimais que correspondem aos movimentos para direita, esquerda, baixo e cima s√£o, respectivamente, 1, 2, 4 e 8. Os endere√ßos decimais
+; que cont√™m as coordenadas iniciais X e Y da esfera e a dire√ß√£o inicial s√£o, respectivamente, 253, 254 e 255. A matriz que representa a caixa est√° contida entre os endere√ßos 217 e 252, sendo que os primeiros 6 
+; endere√ßos representam a primeira linha da matriz, os segundos 6 endere√ßos representam a segunda linha, e assim por diante. Cada posi√ß√£o pode n√£o possuir nenhum redirecionador (valor zero) ou um dos quatro 
+; redirecionadores com os valores j√° mencionados. O resultado (localiza√ß√£o e dire√ß√£o da esfera) ser√° informado, ao final da execu√ß√£o do programa, nos mesmos endere√ßos usados para informar sua localiza√ß√£o e dire√ß√£o de entrada.
 
 Inicio:		LDR A 255 
-		STR A 216     ; Armazena a direÁ„o inicial da esfera.
-		JMP Coord     ; Verifica se h· um redirecionador na posiÁ„o inicial.
+		STR A 216     ; Armazena a dire√ß√£o inicial da esfera.
+		JMP Coord     ; Verifica se h√° um redirecionador na posi√ß√£o inicial.
 
 Decide:		LDR A 216
 		LDR B 216
 		LDR X 216
 		SUB A #1 
-		JZ MoveDir    ; Verifica se ocorrer· uma movimentaÁ„o da esfera para a direita. 
+		JZ MoveDir    ; Verifica se ocorrer√° uma movimenta√ß√£o da esfera para a direita. 
 		SUB B #2
-		JZ MoveEsq    ; Verifica se ocorrer· uma movimentaÁ„o da esfera para a esquerda.
+		JZ MoveEsq    ; Verifica se ocorrer√° uma movimenta√ß√£o da esfera para a esquerda.
 		SUB X #4
-		JZ MoveBaixo  ; Verifica se ocorrer· uma movimentaÁ„o da esfera para baixo.
-		JMP MoveCima  ; Realiza a movimentaÁ„o da esfera para cima.
+		JZ MoveBaixo  ; Verifica se ocorrer√° uma movimenta√ß√£o da esfera para baixo.
+		JMP MoveCima  ; Realiza a movimenta√ß√£o da esfera para cima.
 
 MoveDir:	LDR B 253
 		ADD B #1      
@@ -59,7 +59,7 @@ Limite:		LDR A 253
 		JZ Finaliza3  ; Verifica se a coordenada Y da esfera ultrapassou o limite inferior das coordenadas, para encerrar o programa.
 		SUB B #6      
 		JZ Finaliza4  ; Verifica se a coordenada Y da esfera ultrapassou o limite superior das coordenadas, para encerrar o programa.
-		JMP Coord     ; Identifica o prÛximo redirecionador na matriz, a fim de continuar movimentando a esfera.
+		JMP Coord     ; Identifica o pr√≥ximo redirecionador na matriz, a fim de continuar movimentando a esfera.
 
 Finaliza1: 	LDR A #0      
 		STR A 253     ; Corrige a coordenada X da esfera antes de encerrar o programa.
@@ -78,21 +78,21 @@ Finaliza4: 	LDR A #5
 		JMP Fim       ; Direciona o programa para o seu encerramento. 
 
 Fim: 		LDR X 216     
-		STR X 255     ; Armazena a direÁ„o do movimento da esfera no momento em que ela sai da caixa.
-		HLT           ; Encerra a execuÁ„o do programa.
+		STR X 255     ; Armazena a dire√ß√£o do movimento da esfera no momento em que ela sai da caixa.
+		HLT           ; Encerra a execu√ß√£o do programa.
 
-Coord:		LDR X 254     ; Multiplica o valor da coordenada Y por 6, por meio de de cinco somas sucessivas.
+Coord:		LDR X 254     ; Multiplica o valor da coordenada Y por 6, por meio de cinco somas sucessivas.
 		ADD X 254
 		ADD X 254
 		ADD X 254
 		ADD X 254
 		ADD X 254
 		ADD X 253     ; Soma 6*Y com o valor da coordenada X;
-		ADD X #217    ; Soma 6*Y + X com 217, a fim de encontrar o endereÁo do prÛximo redirecionador da matriz.
-		STR X 215     ; Armazena o endereÁo do prÛximo redirecionador da matriz.
+		ADD X #217    ; Soma 6*Y + X com 217, a fim de encontrar o endere√ßo do pr√≥ximo redirecionador da matriz.
+		STR X 215     ; Armazena o endere√ßo do pr√≥ximo redirecionador da matriz.
 		JMP Matriz
 
-Matriz:		LDR B 215,I   ; Carrega o n˙mero que corresponde ‡ prÛxima direÁ„o do movimento da esfera.
-		JZ Decide     ; Se a esfera n„o ir· mudar de direÁ„o, ent„o o redirecionador n„o È atualizado e o movimento continua.
-		STR B 216     ; Se a esfera ir· mudar de direÁ„o, atualiza o valor do redirecionador.
-		JMP Decide    ; Continua a movimentaÁ„o com o redirecionador atualizado.	
+Matriz:		LDR B 215,I   ; Carrega o n√∫mero que corresponde √† pr√≥xima dire√ß√£o do movimento da esfera.
+		JZ Decide     ; Se a esfera n√£o ir√° mudar de dire√ß√£o, ent√£o o redirecionador n√£o √© atualizado e o movimento continua.
+		STR B 216     ; Se a esfera ir√° mudar de dire√ß√£o, atualiza o valor do redirecionador.
+		JMP Decide    ; Continua a movimenta√ß√£o com o redirecionador atualizado.	
